@@ -35,10 +35,10 @@
 # var callRemoteFunction = function (socket, fName, args) {
 #   // $q is a promise library, any promise library should work
 #   var deferred = $q.defer();
-#   socket.emit("function:call", {function: fName, functionArgs: args, id: funcId});
+#   socket.emit("rpc:function:call", {function: fName, functionArgs: args, id: funcId});
 # 
 #   // socket.once is required, so that the listener is cleared after the function return
-#   socket.once(fName + ":result:" + funcId, function(result) {
+#   socket.once("rpc:" + fName + ":result:" + funcId, function(result) {
 #     deferred.resolve(result);
 #   });
 # 
@@ -58,12 +58,12 @@ module.exports =
     exposedFunctions = _.extend(exposedFunctions, funcObj)
     
   listen: (socket)->
-    socket.on 'function:call', (data)->
+    socket.on 'rpc:function:call', (data)->
       funcId = data.id
       args = data.functionArgs
       functionName = data.function
       result = exposedFunctions[functionName](args)    
-      socket.emit "getDirectoryTree:result:#{funcId}",
+      socket.emit "rpc:#{functionName}:result:#{funcId}",
         result: result
         functionName: functionName
         functionArgs: args
