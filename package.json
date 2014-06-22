@@ -1,0 +1,21 @@
+{
+  "name": "fullStackClass",
+  "version": "0.0.01",
+  "description": "Experiment in altering files on the server from the browser",
+  "repository": {
+    "type": "git",
+    "url": ""
+  },
+  "devDependencies": {
+    "socket.io": "1.0.4",
+    "underscore": "1.6.0",
+    "coffee-script": "1.7.1"
+  },
+  "contributors": [
+    {
+      "name": "Adam Rensel",
+      "email": "adamrensel@codeschool.com"
+    }
+  ],
+  "readmeFilename": "README.md"
+}
