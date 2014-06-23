@@ -6,17 +6,7 @@ var http = require('http').Server(),
     inputData = {},
     rpc = require('./app/rpc')
 
-rpc.expose({
-  getDirectoryTree: function(){
-    return {
-      app: [
-        'file1',
-        'file2'
-      ]
-      
-    }
-  }
-});
+rpc.expose(require('./app/fsHelpers'));
 
 var reBroadcast = function(eventName, socket, fn) {
   socket.on(eventName, function(data){

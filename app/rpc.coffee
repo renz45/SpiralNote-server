@@ -62,10 +62,19 @@ module.exports =
       funcId = data.id
       args = data.functionArgs
       functionName = data.function
-      result = exposedFunctions[functionName](args)    
-      socket.emit "rpc:#{functionName}:result:#{funcId}",
-        result: result
+      resultObj = 
         functionName: functionName
         functionArgs: args
         id: funcId
+      if exposedFunctions[functionName]
+        try
+          resultObj.result = exposedFunctions[functionName](args)                
+        catch e
+          resultObj.error = e.message
+      else
+        resultObj.error = "Function #{functionName} not found in exposed functions"
+      
+      socket.emit "rpc:#{functionName}:result:#{funcId}", resultObj
+          
+          
     
