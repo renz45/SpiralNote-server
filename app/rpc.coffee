@@ -1,19 +1,29 @@
 # A simple remote procedures implmentation used for calling functions on the server
 # over a socket connection using socket.io. Function must be exposed to the rpc
 # before they can be called remotely. Example usage:
+#
+# exposed functions can also return a q based promise and rpc will wait until it is
+# resolved or rejected.
 # 
 # // SERVER
 # var http = require('http').Server(),
 #     io = require('socket.io')(http),
-#     rpc = require('./app/rpc') 
+#     rpc = require('./app/rpc')
+#     q = require('q')
 # 
 # rpc.expose({
 #   function1: function(){
 #     //...
 #   },
-#   function2: function(){
-#     //...
-#   }
+# function2: function(){
+#   var deferred = q.defer()
+#   
+#   someAsyncFunction(function(data){
+#     deferred.resolve(data);  
+#   })
+#   
+#   return deferred.promise;
+# }
 # });
 # 
 # io.on('connection', function(socket){
@@ -85,6 +95,3 @@ module.exports =
           socket.emit "rpc:#{functionName}:result:#{funcId}", resultObj
       else
         socket.emit "rpc:#{functionName}:result:#{funcId}", resultObj
-          
-          
-    
