@@ -1,4 +1,5 @@
-require('coffee-script/register');
+require('coffee-script/register')
+
 var http = require('http').Server(),
     io = require('socket.io')(http),
     _ = require('underscore'),
