@@ -1,6 +1,6 @@
-# Full Stack Class
+# Spiral Note Server
 
-Experiment in editing files from the client
+Server used with the SpiralNote code editor to edit remote files
 
 # Notes
 To debug this you can install node-inspector with: `npm install -g node-inspector`
