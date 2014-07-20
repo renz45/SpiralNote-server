@@ -17,5 +17,9 @@
       "email": "adamrensel@codeschool.com"
     }
   ],
-  "readmeFilename": "README.md"
+  "readmeFilename": "README.md",
+  "scripts": {
+    "debug": "node-inspector --config ./inspector-config.json & node --debug app.js",
+    "start": "node app.js"
+  }
 }
